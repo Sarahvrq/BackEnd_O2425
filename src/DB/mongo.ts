@@ -1,6 +1,5 @@
 import { Db, MongoClient } from "mongodb";
 import dotenv from "dotenv";
-
 import { dbName } from "../utils" //para no tener que declarar nombres over and over again
 
 dotenv.config();
