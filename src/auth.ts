@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import jwt from "jsonwebtoken";
 import { getDB } from './DB/mongo';
 import { ObjectId } from 'mongodb';
-import { X_COLLECTION } from './utils';
+import { USER_COLLECTION } from './utils';
 
 dotenv.config()
 const SUPER_SECRETO = process.env.SECRET;
@@ -30,6 +30,6 @@ export const getUserFromToken = async (token: string) => {
     if(!payload) return null;
 
     const db = getDB();
-    return await db.collection(X_COLLECTION).findOne({ _id: new ObjectId(payload.userId.toString())});
+    return await db.collection(USER_COLLECTION).findOne({ _id: new ObjectId(payload.userId.toString())});
 
 }
