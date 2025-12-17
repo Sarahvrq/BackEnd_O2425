@@ -1,3 +1,4 @@
-export const dbName = "Examen_Final_DB";
+export const dbName = "Ordinaria_2425";
 
-export const X_COLLECTION= "x";
+export const USER_COLLECTION= "Users";
+export const RESTAURANT_COLLECTION= "Restaurants";
