@@ -1,13 +1,10 @@
 import { ObjectId } from "mongodb"
 
-export type Tasks = {
-
+export type Restaurant = {  
     _id: ObjectId
-    title: String, 
-    projectId: ObjectId,
-    assignedTo: ObjectId,
-    status: String,
-    priority: String,
-    dueDate: Date
+    name: string,
+    address: string,
+    city: ObjectId,
+    phone: string,
     
 };
