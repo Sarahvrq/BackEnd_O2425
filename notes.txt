@@ -1,0 +1,4 @@
+-el .env tiene que siempre estar a la altura del package.json
+
+-Database User: svrqdev_db_user
+-password: fd2flSVVgfGJ4jzY
