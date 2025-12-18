@@ -29,6 +29,8 @@ type Query {
 
     getRestaurants(page: Int, size: Int): [Restaurant!]!
     getRestaurant(_id: ID!): Restaurant
+
+    getCity(_id: ID!): City
 }
 
     type Mutation {

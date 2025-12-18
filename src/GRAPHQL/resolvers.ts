@@ -2,15 +2,14 @@ import { ObjectId } from "mongodb";
 import { getDB } from "../DB/mongo"
 import { IResolvers } from "@graphql-tools/utils";
 import { signToken } from "../auth";
-import { USER_COLLECTION, RESTAURANT_COLLECTION,CITY_COLLECTION} from "../utils";
 import { deleteRestaurant, getALLRests, getONERest, updateRest } from "../COLLECTIONS/Restaurants";
 import { CreateUser, validateUser } from "../COLLECTIONS/Users";
 import { City } from "../TYPES/City";
-import { ArraydeRestEnCiudad } from "../COLLECTIONS/Cities";
+import { ArraydeRestEnCiudad, getCity } from "../COLLECTIONS/Cities";
 
 
 export const resolvers: IResolvers = {
-    Queries: {
+    Query: {
         me: async (_,__, {user}) => {
             if(!user) throw new Error ("Login necesaria");
             return {_id: user._id.toString(), ...user}; 
@@ -23,9 +22,13 @@ export const resolvers: IResolvers = {
         getRestaurant: async (_,{id}) => {
             return await getONERest(id);
         },
+
+          getCity: async (_, { _id }) => {
+            return await getCity(new ObjectId(_id));
+  },
     },
 
-    Mutations: {
+    Mutation: {
         register: async(_,{email,password}) => {
             const UserId = await CreateUser(email, password);
             return signToken(UserId);
