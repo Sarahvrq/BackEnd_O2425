@@ -33,13 +33,13 @@ type Query {
     getCity(_id: ID!): City
 }
 
-    type Mutation {
-        register(email: String!, password: String!): String!
-        login(email: String!, password: String!): String!
+type Mutation {
+    register(email: String!, password: String!): String!
+    login(email: String!, password: String!): String!
 
-        addRestaurant(name: String!, address: String!, city: ID!, phone: String!): Restaurant!
-        updateRestaurant(_id: ID!, name: String, address: String, city: ID, phone: String): Restaurant!
-        deleteRestaurant(_id: ID!): Boolean!
+    addRestaurant(name: String!, address: String!, city: ID!, phone: String!): Restaurant!
+    updateRestaurant(_id: ID!, name: String, address: String, city: ID, phone: String): Restaurant!
+    deleteRestaurant(_id: ID!): Boolean!
 }
 
 `;
