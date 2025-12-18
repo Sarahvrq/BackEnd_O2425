@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { getDB } from "../DB/mongo"
 import { IResolvers } from "@graphql-tools/utils";
 import { signToken } from "../auth";
-import { deleteRestaurant, getALLRests, getONERest, updateRest } from "../COLLECTIONS/Restaurants";
+import { addRest, deleteRestaurant, getALLRests, getONERest, updateRest } from "../COLLECTIONS/Restaurants";
 import { CreateUser, validateUser } from "../COLLECTIONS/Users";
 import { City } from "../TYPES/City";
 import { ArraydeRestEnCiudad, getCity } from "../COLLECTIONS/Cities";
@@ -19,13 +19,13 @@ export const resolvers: IResolvers = {
             return await getALLRests(page,size);
         },
 
-        getRestaurant: async (_,{id}) => {
-            return await getONERest(id);
+        getRestaurant: async (_,{_id}) => {
+            return await getONERest(new ObjectId(_id));
         },
 
-          getCity: async (_, { _id }) => {
+          getCity: async (_, {_id}) => {
             return await getCity(new ObjectId(_id));
-  },
+        },
     },
 
     Mutation: {
@@ -43,15 +43,16 @@ export const resolvers: IResolvers = {
 
         addRestaurant: async(_, {name, address, city, phone}, {user}) => {
             if(!user) throw new Error ("ERROR: Necesitas estar logeado para añadir restaurante");
+            return await addRest(name,address,city,phone);
         },
 
         updateRestaurant: async(_,{restaurant}, {city}) => {
             return await updateRest(restaurant, city);
         },
 
-        deleteRestaurant: async(_, {id}, {user}) => {
+        deleteRestaurant: async(_, {_id}, {user}) => {
             if(!user) throw new Error ("ERROR: Necesitas estar logeado para eliminar restaurante");
-            return await deleteRestaurant(id);
+            return await deleteRestaurant(new ObjectId(_id));
         },
     },
 

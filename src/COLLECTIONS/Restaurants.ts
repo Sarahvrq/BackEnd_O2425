@@ -12,9 +12,9 @@ export const getALLRests = async (page?: number, size?: number) => {
     return result;
 };
 
-export const getONERest = async (city_id: ObjectId) => {
+export const getONERest = async (rest_id: ObjectId) => {
     const db = getDB();
-    const restaurante = await db.collection(RESTAURANT_COLLECTION).findOne({_id: new ObjectId(city_id)});
+    const restaurante = await db.collection(RESTAURANT_COLLECTION).findOne({_id: new ObjectId(rest_id)});
     if (!restaurante) throw new Error ("ERROR: Resturante no existe en esa ciudad");
     return restaurante;
 };
@@ -60,7 +60,7 @@ export const updateRest = async(rest_id: ObjectId, city_id: ObjectId) => {
     return cityUpdate;
 };
 
-export const deleteRestaurant = async(id: string) => {
+export const deleteRestaurant = async(id: ObjectId) => {
     const db = getDB();
     const result = await db.collection(RESTAURANT_COLLECTION).deleteOne({_id: new ObjectId(id)});
 
