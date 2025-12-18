@@ -19,14 +19,6 @@ export const getONERest = async (city_id: ObjectId) => {
     return restaurante;
 };
 
-export const getCity = async (id: ObjectId) => {
-    const db = getDB();
-    const ciudad = await db.collection(CITY_COLLECTION).findOne({_id: new ObjectId(id)});
-    if(!ciudad) throw new Error ("ERROR: Ciudad no existe");
-    return ciudad;
-
-};
-
         export const ValiTelefLength = async (phone: string) => {
         if (phone.length > 15) throw new Error("ERROR: Numero no valido");
 
